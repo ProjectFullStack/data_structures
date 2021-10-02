@@ -12,6 +12,8 @@ class SinglyLinkedList:
     SinglyLinkedList Class
     Methods:
         add(item) - O(1) - add item to beginning of the list
+        search(item) - O(1) - search for the item in the list, return boolean
+        index(item) - O(1) - search for the item in the list, return the index
     """
 
     def __init__(self):
@@ -63,4 +65,40 @@ class SinglyLinkedList:
         new_node = Node(data)
         new_node.set_next(self.head)
         self.head = new_node
+
+    def search(self, item):
+        """
+        Searches for item in the list, returns true if it is found, else false
+        :param item: the item to search for
+        :type item: any
+        :return: true if not found, else false
+        :rtype: bool
+        """
+        current_node = self.head
+        while current_node is not None and current_node.get_data() != item:
+            current_node = current_node.get_next()
+        return current_node is not None
+
+    def index(self, item):
+        """
+        Searches for item in the list, returns the index it is found at,
+        else -1
+        :param item: the item to search for
+        :type item: any
+        :return: -1 if not found, else the index it is found at
+        :rtype: int
+        """
+        # fail fast
+        if self.head is None:
+            return -1
+
+        current_node = self.head
+        index = 0
+        while current_node.get_data() != item:
+            current_node = current_node.get_next()
+            index += 1
+            if current_node is None:
+                return -1
+
+        return index
 

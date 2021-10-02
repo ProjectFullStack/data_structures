@@ -88,6 +88,34 @@ class TestNodeClass(unittest.TestCase):
         self.assertFalse(ll.search(-5))
         self.assertFalse(ll.search(43.7))
 
+    def test_ll_index(self):
+        """
+        Test new SinglyLinkedList index method, which checks if a given item
+        is in the list and returns the index where it is
+        """
+        ll = SinglyLinkedList()
+        self.assertIsNone(ll.head, None)
+
+        # test searching across empty list does not give error
+        self.assertEqual(ll.index(99), -1)
+
+        # add elements and test for elements that are in the list
+        ll.add(17)
+        self.assertEqual(ll.index(17), 0)
+        ll.add(23)
+        self.assertEqual(ll.index(17), 1)
+        self.assertEqual(ll.index(23), 0)
+        ll.add(49)
+        self.assertEqual(ll.index(17), 2)
+        self.assertEqual(ll.index(23), 1)
+        self.assertEqual(ll.index(49), 0)
+
+        # test for elements that are not in the list
+        self.assertEqual(ll.index(99), -1)
+        self.assertEqual(ll.index(10), -1)
+        self.assertEqual(ll.index(-5), -1)
+        self.assertEqual(ll.index(43.7), -1)
+
 
 
 if __name__ == "__main__":
