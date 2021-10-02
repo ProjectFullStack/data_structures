@@ -116,6 +116,65 @@ class TestNodeClass(unittest.TestCase):
         self.assertEqual(ll.index(-5), -1)
         self.assertEqual(ll.index(43.7), -1)
 
+    def test_ll_remove(self):
+        """
+        Test new SinglyLinkedList remove method, which will remove the first
+        node with a given value, it does NOT return the removed node
+        """
+        ll = SinglyLinkedList()
+        self.assertIsNone(ll.head, None)
+
+        # test remove on empty list, should return None and not raise
+        # any exceptions
+        self.assertIsNone(ll.remove(99))
+
+        # add elements and test for elements that are in the list
+        ll.add(17)
+        ll.add(23)
+        ll.add(49)
+
+        # [49, 23, 17] remove the head node (49)
+        self.assertTrue(ll.head.get_data(), 49)
+        self.assertTrue(ll.search(49))
+        ll.remove(49)
+        self.assertFalse(ll.search(49))
+        # and check that 23 begins the new head
+        self.assertTrue(ll.head.get_data(), 23)
+
+        # [23, 17] remove the tail node (17)
+        self.assertTrue(ll.search(17))
+        ll.remove(17)
+        self.assertFalse(ll.search(17))
+
+        ll.add(99)
+        ll.add(87)
+        # [87, 99, 23] remove a middle node (99)
+        self.assertTrue(ll.head.get_data(), 87)
+        self.assertTrue(ll.search(99))
+        ll.remove(99)
+        self.assertFalse(ll.search(99))
+        # and check that the head has not changed
+        self.assertTrue(ll.head.get_data(), 87)
+
+        # [87, 23]
+        # add some duplicates, test that the remove function
+        # removes only the first item, not ALL the times
+        ll.add(19)
+        ll.add(19)
+        ll.add(100)
+        # [100, 19, 19, 87, 23]
+        self.assertTrue(ll.head.get_data(), 100)
+        self.assertTrue(ll.search(19))
+        ll.remove(19)
+        self.assertTrue(ll.search(19))  # true because should be one more 19
+        ll.remove(19)
+        self.assertFalse(ll.search(19)) # now false
+        # and check that 100 is still the head
+        self.assertTrue(ll.head.get_data(), 100)
+
+
+
+
 
 
 if __name__ == "__main__":
