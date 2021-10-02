@@ -60,6 +60,34 @@ class TestNodeClass(unittest.TestCase):
         # to the next node of 17
         self.assertEqual(ll.head.get_next().get_data(), 17)
 
+    def test_ll_search(self):
+        """
+        Test new SinglyLinkedList search method, which checks if a given item
+        is in the list
+        """
+        ll = SinglyLinkedList()
+        self.assertIsNone(ll.head, None)
+
+        # test searching across empty list does not give error
+        self.assertFalse(ll.search(99))
+
+        # add elements and test for elements that are in the list
+        ll.add(17)
+        self.assertTrue(ll.search(17))
+        ll.add(23)
+        self.assertTrue(ll.search(17))
+        self.assertTrue(ll.search(23))
+        ll.add(49)
+        self.assertTrue(ll.search(17))
+        self.assertTrue(ll.search(23))
+        self.assertTrue(ll.search(49))
+
+        # test for elements that are not in the list
+        self.assertFalse(ll.search(99))
+        self.assertFalse(ll.search(10))
+        self.assertFalse(ll.search(-5))
+        self.assertFalse(ll.search(43.7))
+
 
 
 if __name__ == "__main__":
