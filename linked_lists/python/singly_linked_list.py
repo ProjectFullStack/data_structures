@@ -116,8 +116,6 @@ class SinglyLinkedList:
                 prev_node = current_node
                 current_node = current_node.get_next()
 
-        # todo handle where current_node is False
-        # todo that will happen if the item is NOT in the list
         if current_node is None:
             raise ValueError(f"the item: {item}, is not in the list")
 
