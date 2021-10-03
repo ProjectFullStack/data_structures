@@ -124,9 +124,8 @@ class TestNodeClass(unittest.TestCase):
         ll = SinglyLinkedList()
         self.assertIsNone(ll.head, None)
 
-        # test remove on empty list, should return None and not raise
-        # any exceptions
-        self.assertIsNone(ll.remove(99))
+        # test remove on empty list, should raise Value error
+        self.assertRaises(ValueError, ll.remove, 99)
 
         # add elements and test for elements that are in the list
         ll.add(17)
@@ -172,6 +171,8 @@ class TestNodeClass(unittest.TestCase):
         # and check that 100 is still the head
         self.assertTrue(ll.head.get_data(), 100)
 
+        # test for removing items that don't exist
+        self.assertRaises(ValueError, ll.remove, -100)
 
 
 

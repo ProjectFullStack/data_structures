@@ -14,6 +14,8 @@ class SinglyLinkedList:
         add(item) - O(1) - add item to beginning of the list
         search(item) - O(1) - search for the item in the list, return boolean
         index(item) - O(1) - search for the item in the list, return the index
+        remove(item) - O(n) to find it, O(1) to remove
+                - removes the FIRST item in the list
     """
 
     def __init__(self):
@@ -102,3 +104,28 @@ class SinglyLinkedList:
 
         return index
 
+    def remove(self, item):
+        current_node = self.head
+        prev_node = None
+        found = False
+
+        while not found and current_node is not None:
+            if current_node.get_data() == item:
+                found = True
+            else:
+                prev_node = current_node
+                current_node = current_node.get_next()
+
+        # todo handle where current_node is False
+        # todo that will happen if the item is NOT in the list
+        if current_node is None:
+            raise ValueError(f"the item: {item}, is not in the list")
+
+        # if we get down here, the current_node is the node we want to remove
+        if prev_node is None:
+            # this happens if we are removing the head of the list
+            self.head = current_node.get_next()
+            current_node.set_next(None)
+        else:
+            prev_node.set_next(current_node.get_next())
+            current_node.set_next(None)
