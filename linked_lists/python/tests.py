@@ -190,20 +190,20 @@ class TestNodeClass(unittest.TestCase):
         ll = SinglyLinkedList()
         self.assertIsNone(ll.head, None)
         self.assertTrue(ll.is_empty())
-        self.assertEquals(ll.size(), 0)
+        self.assertEqual(ll.size(), 0)
         ll.add(19)
         self.assertFalse(ll.is_empty())
-        self.assertEquals(ll.size(), 1)
+        self.assertEqual(ll.size(), 1)
         ll.remove(19)
-        self.assertEquals(ll.size(), 0)
+        self.assertEqual(ll.size(), 0)
         self.assertTrue(ll.is_empty())
 
         ll.add(19)
-        self.assertEquals(ll.size(), 1)
+        self.assertEqual(ll.size(), 1)
         ll.add(81)
-        self.assertEquals(ll.size(), 2)
+        self.assertEqual(ll.size(), 2)
         ll.add(100)
-        self.assertEquals(ll.size(), 3)
+        self.assertEqual(ll.size(), 3)
 
 
 
