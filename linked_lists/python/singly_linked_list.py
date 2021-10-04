@@ -18,6 +18,8 @@ class SinglyLinkedList:
                 - removes the FIRST item in the list
         is_empty() - O(1) - return true if list is empty, else false
         size() - O(n) - returns the number of nodes in the list
+        append(item) - O(n) - appends the item to the end of the list
+        insert(item, position) - O(n) - inserts the item at the given position
     """
 
     def __init__(self):
@@ -155,3 +157,53 @@ class SinglyLinkedList:
             count += 1
             current_node = current_node.get_next()
         return count
+
+    def append(self, item):
+        """
+        Appends the item to the end of the list
+        :param item: the item to insert
+        :type item: any
+        """
+        new_node = Node(item)
+
+        if self.head is None:
+            self.head = new_node
+            return
+
+        current_node = self.head
+        while current_node.get_next() is not None:
+            current_node = current_node.get_next()
+        # when we get here, the current_node is the last node in the list
+        current_node.set_next(new_node)
+
+    def insert(self, item, position):
+        """
+        Inserts the item at the given index
+        :param item: the item to insert
+        :type item: any
+        :param position: the index which to insert it at
+        :type position: int
+        """
+        current_node = self.head
+        prev_node = None
+        current_position = 0
+        while current_node:
+            if current_position == position:
+                # we found the spot to insert, break
+                break
+            prev_node = current_node
+            current_node = current_node.get_next()
+            current_position += 1
+
+        if current_node is None:
+            # index out of range
+            raise IndexError(f"Index {position} out of range.")
+
+        new_node = Node(item)
+        if prev_node is None:
+            # must be inserting at the head
+            new_node.set_next(self.head)
+            self.head = new_node
+        else:
+            prev_node.set_next(new_node)
+            new_node.set_next(current_node)

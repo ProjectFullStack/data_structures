@@ -187,6 +187,9 @@ class TestNodeClass(unittest.TestCase):
         self.assertTrue(ll.is_empty())
 
     def test_ll_size(self):
+        """
+        Test the size method
+        """
         ll = SinglyLinkedList()
         self.assertIsNone(ll.head, None)
         self.assertTrue(ll.is_empty())
@@ -204,6 +207,56 @@ class TestNodeClass(unittest.TestCase):
         self.assertEqual(ll.size(), 2)
         ll.add(100)
         self.assertEqual(ll.size(), 3)
+
+    def test_ll_append(self):
+        """
+        Tests the append method
+        """
+        ll = SinglyLinkedList()
+        self.assertIsNone(ll.head, None)
+
+        ll.append(17)
+        self.assertEqual(str(ll), "[17]")
+        ll.append(23)
+        self.assertEqual(str(ll), "[17, 23]")
+        ll.append(100)
+        self.assertEqual(str(ll), "[17, 23, 100]")
+
+    def test_ll_insert(self):
+        """
+        Tests the insert method
+        """
+        ll = SinglyLinkedList()
+        self.assertIsNone(ll.head, None)
+
+        # insert item 238 at index -5 of empty list, expect out of bounds
+        self.assertRaises(IndexError, ll.insert, 238, -5)
+
+        # insert item 238 at index 1 of empty list, expect out of bounds
+        self.assertRaises(IndexError, ll.insert, 238, 1)
+
+        # insert item 238 at index 0 of empty list, expect out of bounds
+        self.assertRaises(IndexError, ll.insert, 238, 0)
+
+        ll.add(17)
+        self.assertEqual(str(ll), "[17]")
+
+        ll.insert(23, 0)  # insert item 17 at index 0
+        self.assertEqual(str(ll), "[23, 17]")
+
+        ll.insert(48, 1)  # insert item 48 at index 1
+        self.assertEqual(str(ll), "[23, 48, 17]")
+
+        ll.insert(99, 2)  # insert item 99 at index 2
+        self.assertEqual(str(ll), "[23, 48, 99, 17]")
+
+        ll.insert(139, 0)  # insert item 139 at index 0
+        self.assertEqual(str(ll), "[139, 23, 48, 99, 17]")
+
+        # insert item 928 at index 5, expect out of bounds
+        self.assertRaises(IndexError, ll.insert, 928, 5)
+
+
 
 
 
