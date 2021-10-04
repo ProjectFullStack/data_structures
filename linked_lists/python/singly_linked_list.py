@@ -16,6 +16,8 @@ class SinglyLinkedList:
         index(item) - O(1) - search for the item in the list, return the index
         remove(item) - O(n) to find it, O(1) to remove
                 - removes the FIRST item in the list
+        is_empty() - O(1) - return true if list is empty, else false
+        size() - O(n) - returns the number of nodes in the list
     """
 
     def __init__(self):
