@@ -174,6 +174,38 @@ class TestNodeClass(unittest.TestCase):
         # test for removing items that don't exist
         self.assertRaises(ValueError, ll.remove, -100)
 
+    def test_ll_is_empty(self):
+        """
+        Test the is_empty method
+        """
+        ll = SinglyLinkedList()
+        self.assertIsNone(ll.head, None)
+        self.assertTrue(ll.is_empty())
+        ll.add(19)
+        self.assertFalse(ll.is_empty())
+        ll.remove(19)
+        self.assertTrue(ll.is_empty())
+
+    def test_ll_size(self):
+        ll = SinglyLinkedList()
+        self.assertIsNone(ll.head, None)
+        self.assertTrue(ll.is_empty())
+        self.assertEquals(ll.size(), 0)
+        ll.add(19)
+        self.assertFalse(ll.is_empty())
+        self.assertEquals(ll.size(), 1)
+        ll.remove(19)
+        self.assertEquals(ll.size(), 0)
+        self.assertTrue(ll.is_empty())
+
+        ll.add(19)
+        self.assertEquals(ll.size(), 1)
+        ll.add(81)
+        self.assertEquals(ll.size(), 2)
+        ll.add(100)
+        self.assertEquals(ll.size(), 3)
+
+
 
 
 

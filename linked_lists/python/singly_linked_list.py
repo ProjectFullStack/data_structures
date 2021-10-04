@@ -105,6 +105,11 @@ class SinglyLinkedList:
         return index
 
     def remove(self, item):
+        """
+        Removes the first instance of item from the list
+        :param item: The item to search for to remove
+        :type item: any
+        """
         current_node = self.head
         prev_node = None
         found = False
@@ -127,3 +132,24 @@ class SinglyLinkedList:
         else:
             prev_node.set_next(current_node.get_next())
             current_node.set_next(None)
+
+    def is_empty(self):
+        """
+        Returns true if list is empty, else false
+        :return: true if list is empty, else false
+        :rtype: bool
+        """
+        return self.head is None
+
+    def size(self):
+        """
+        Returns the size of the linked list
+        :return: the number of nodes in the linked list
+        :rtype: int
+        """
+        count = 0
+        current_node = self.head
+        while current_node is not None:
+            count += 1
+            current_node = current_node.get_next()
+        return count
