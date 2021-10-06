@@ -20,6 +20,7 @@ class SinglyLinkedList:
         size() - O(n) - returns the number of nodes in the list
         append(item) - O(n) - appends the item to the end of the list
         insert(item, position) - O(n) - inserts the item at the given position
+        pop(position) - O(n) - find and remove the node at position
     """
 
     def __init__(self):
@@ -159,11 +160,6 @@ class SinglyLinkedList:
         return count
 
     def append(self, item):
-        """
-        Appends the item to the end of the list
-        :param item: the item to insert
-        :type item: any
-        """
         new_node = Node(item)
 
         if self.head is None:
@@ -173,37 +169,58 @@ class SinglyLinkedList:
         current_node = self.head
         while current_node.get_next() is not None:
             current_node = current_node.get_next()
-        # when we get here, the current_node is the last node in the list
+        # once I get here, I know current_node is going to be the last node
         current_node.set_next(new_node)
 
-    def insert(self, item, position):
-        """
-        Inserts the item at the given index
-        :param item: the item to insert
-        :type item: any
-        :param position: the index which to insert it at
-        :type position: int
-        """
+    def insert(self, item, index):
         current_node = self.head
         prev_node = None
         current_position = 0
+
         while current_node:
-            if current_position == position:
-                # we found the spot to insert, break
+            if current_position == index:
                 break
             prev_node = current_node
             current_node = current_node.get_next()
             current_position += 1
 
         if current_node is None:
-            # index out of range
-            raise IndexError(f"Index {position} out of range.")
+            # this happens if the list is empty, or the index is out of bounds
+            raise IndexError(f"Index {index} is out of range")
 
+        # if we get here, the current_node will be the node that exists
+        # at the index which we want to insert our new node at
         new_node = Node(item)
         if prev_node is None:
-            # must be inserting at the head
+            # we are inserting at the head
             new_node.set_next(self.head)
             self.head = new_node
         else:
+            # inserting somewhere else in the list
             prev_node.set_next(new_node)
             new_node.set_next(current_node)
+
+    def pop(self, index):
+        current_node = self.head
+        prev_node = None
+        current_position = 0
+
+        while current_node:
+            if current_position == index:
+                break
+            prev_node = current_node
+            current_node = current_node.get_next()
+            current_position += 1
+
+        if current_node is None:
+            # this happens if the list is empty, or the index is out of bounds
+            raise IndexError(f"Index {index} is out of range")
+
+        # if we get here, current node is the node we want to remove
+        if prev_node is None:
+            # popping from the head
+            self.head = current_node.get_next()
+        else:
+            prev_node.set_next(current_node.get_next())
+        current_node.set_next(None)
+        return current_node

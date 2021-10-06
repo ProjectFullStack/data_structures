@@ -257,6 +257,46 @@ class TestNodeClass(unittest.TestCase):
         self.assertRaises(IndexError, ll.insert, 928, 5)
 
 
+    def test_ll_pop(self):
+        """
+        Tests the pop method
+        """
+        ll = SinglyLinkedList()
+        self.assertIsNone(ll.head, None)
+
+        # insert item 238 at index -5 of empty list, expect out of bounds
+        self.assertRaises(IndexError, ll.pop, -5)
+
+        # insert item 238 at index 1 of empty list, expect out of bounds
+        self.assertRaises(IndexError, ll.pop, 1)
+
+        # insert item 238 at index 0 of empty list, expect out of bounds
+        self.assertRaises(IndexError, ll.pop, 0)
+
+        ll.add(17)
+        ll.add(23)
+        ll.add(43)
+        self.assertEqual(str(ll), "[43, 23, 17]")
+
+        popped_node = ll.pop(1)  # pop item at position 1 (23)
+        self.assertIsInstance(popped_node, Node)
+        self.assertEqual(popped_node.get_data(), 23)
+        self.assertEqual(str(ll), "[43, 17]")
+
+        # pop from the head
+        popped_node = ll.pop(0)  # pop item at position 0 (43)
+        self.assertIsInstance(popped_node, Node)
+        self.assertEqual(popped_node.get_data(), 43)
+        self.assertEqual(str(ll), "[17]")
+
+        # add two more nodes, then pop from tail
+        ll.add(23)
+        ll.add(43)
+        self.assertEqual(str(ll), "[43, 23, 17]")
+        popped_node = ll.pop(2)  # pop item at position 2 (17)
+        self.assertIsInstance(popped_node, Node)
+        self.assertEqual(popped_node.get_data(), 17)
+        self.assertEqual(str(ll), "[43, 23]")
 
 
 
