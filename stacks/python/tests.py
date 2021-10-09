@@ -1,7 +1,8 @@
 import unittest
 
-from stack import ListStack, NodeStack
 from node import Node
+from list_stack import ListStack
+from node_stack import NodeStack
 
 
 class NodeTests:
