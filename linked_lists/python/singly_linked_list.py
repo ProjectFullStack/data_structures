@@ -160,6 +160,11 @@ class SinglyLinkedList:
         return count
 
     def append(self, item):
+        """
+        Appends a new node to the end of the linked list
+        :param item: the item to add
+        :type item: any
+        """
         new_node = Node(item)
 
         if self.head is None:
@@ -173,6 +178,13 @@ class SinglyLinkedList:
         current_node.set_next(new_node)
 
     def insert(self, item, index):
+        """
+        Inserts a new node at the given index
+        :param item: the item to add
+        :type item: any
+        :param index: the index to add the node at
+        :type index: int
+        """
         current_node = self.head
         prev_node = None
         current_position = 0
@@ -201,6 +213,13 @@ class SinglyLinkedList:
             new_node.set_next(current_node)
 
     def pop(self, index):
+        """
+        Pops a node from the list
+        :param index: the index to pop
+        :type index: int
+        :return: the popped Node
+        :rtype: Node
+        """
         current_node = self.head
         prev_node = None
         current_position = 0
@@ -216,8 +235,8 @@ class SinglyLinkedList:
             # this happens if the list is empty, or the index is out of bounds
             raise IndexError(f"Index {index} is out of range")
 
-        # if we get here, current node is the node we want to remove
-        if prev_node is None:
+        # if we get here, the current node is the node we want to pop
+        if self.head is current_node:
             # popping from the head
             self.head = current_node.get_next()
         else:
