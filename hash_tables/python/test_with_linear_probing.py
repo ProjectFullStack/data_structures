@@ -41,6 +41,12 @@ class TestWithLinearProbing(unittest.TestCase):
         # get a key that doesn't exist should raise a KeyError
         self.assertRaises(KeyError, ht.get, 'ron')
 
+    def test_keys(self):
+        ht = HashTable()
+        ht.set('jon', 'jons value')
+        ht.set('amy', 'amys value')
+        ht.set('lon', 'lons value')
+        self.assertEqual(ht.keys(), ['jon', 'amy', 'lon'])
 
 
 if __name__ == "__main__":

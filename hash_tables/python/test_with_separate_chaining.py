@@ -42,6 +42,15 @@ class TestWithSeparateChaining(unittest.TestCase):
         # jon will still return jons value, amy will NOT have over written jon
         self.assertEqual(ht.get('jon'), 'jons value')
 
+    def test_keys(self):
+        ht = HashTable()
+        ht.set('jon', 'jons value')
+        ht.set('mike', 'mikes value')
+        self.assertEqual(ht.keys(), ['jon', 'mike'])
+        ht.set('amy', 'amys value')
+        self.assertEqual(ht.keys(), ['jon', 'amy', 'mike'])
+
+
 
 if __name__ == "__main__":
     unittest.main()

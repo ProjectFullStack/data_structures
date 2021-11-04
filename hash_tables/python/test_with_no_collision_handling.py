@@ -42,6 +42,15 @@ class TestWithoutCollisionHandling(unittest.TestCase):
         # jon will return None now
         self.assertIsNone(ht.get('jon'))
 
+    def test_keys(self):
+        ht = HashTable()
+        ht.set('jon', 'jons value')
+        ht.set('mike', 'mikes value')
+        # amy will overwrite jon
+        self.assertEqual(ht.keys(), ['jon', 'mike'])
+        ht.set('amy', 'amys value')
+        self.assertEqual(ht.keys(), ['amy', 'mike'])
+
 
 if __name__ == "__main__":
     unittest.main()

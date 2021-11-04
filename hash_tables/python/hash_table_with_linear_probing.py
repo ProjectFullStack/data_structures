@@ -59,8 +59,7 @@ class HashTable:
         key_store = []
         for bucket in self._map:
             if bucket is not None:
-                for k, v in bucket:
-                    key_store.append(k)
+                key_store.append(bucket[0])
         return key_store
 
 
